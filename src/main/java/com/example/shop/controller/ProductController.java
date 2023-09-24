@@ -14,11 +14,13 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/create")
     public ResponseEntity<?> createProduct(@RequestBody ProductDto product){
         return new ResponseEntity<>(productService.save(product), HttpStatus.CREATED);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/all")
     public ResponseEntity<?> getAllProducts(){
         return new ResponseEntity<>(productService.findAll(), HttpStatus.OK);
