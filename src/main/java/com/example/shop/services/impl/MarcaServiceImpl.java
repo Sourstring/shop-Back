@@ -32,7 +32,7 @@ public class MarcaServiceImpl implements MarcaService {
 
     @Override
     public Marca findByNombre(String nombre) {
-        return marcaRepo.getByNombre(nombre);
+        return marcaRepo.findByNombre(nombre);
     }
 
     @Override
