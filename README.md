@@ -1,0 +1,1 @@
+For now it uses a local database that you can change in the application.properties. Just remember to add the right connector to the project so you can start it. No need to add any marca or category you can add them through the front end here https://github.com/Sourstring/shop-front
