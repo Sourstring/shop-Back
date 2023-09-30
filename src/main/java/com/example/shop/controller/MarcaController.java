@@ -15,11 +15,13 @@ public class MarcaController {
     private MarcaService marcaService;
 
     @GetMapping
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<?> findAll() {
         return new ResponseEntity<>(marcaService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping("/save")
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<?> save(@RequestBody MarcaDto marca) {
         return new ResponseEntity<>(marcaService.save(marca), HttpStatus.OK);
     }
