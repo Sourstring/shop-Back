@@ -18,8 +18,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "marca")
-    private String marca;
+    @ManyToOne
+    private Marca marca;
 
     @Column(name = "modelo")
     private String modelo;

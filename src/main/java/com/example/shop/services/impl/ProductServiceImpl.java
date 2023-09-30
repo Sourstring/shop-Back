@@ -1,9 +1,11 @@
 package com.example.shop.services.impl;
 
 import com.example.shop.dtos.ProductDto;
+import com.example.shop.entities.Marca;
 import com.example.shop.entities.Product;
-import com.example.shop.repositories.CategoryRepo;
 import com.example.shop.repositories.ProductRepo;
+import com.example.shop.services.CategoryService;
+import com.example.shop.services.MarcaService;
 import com.example.shop.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,11 +19,14 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepo productRepo;
 
     @Autowired
-    private CategoryRepo categoryRepo;
+    private CategoryService categoryService;
+
+    @Autowired
+    private MarcaService marcaService;
 
     public Product save(ProductDto product){
-        Product newProduct = Product.builder().marca(product.getMarca()).modelo(product.getModelo()).descripcion(product.getDescripcion())
-                .precio(product.getPrecio()).stock(product.getStock()).category(categoryRepo.findByNombre(product.getCategory())).build();
+        Product newProduct = Product.builder().marca(marcaService.findByNombre(product.getMarca())).modelo(product.getModelo()).descripcion(product.getDescripcion())
+                .precio(product.getPrecio()).stock(product.getStock()).category(categoryService.findByNombre(product.getCategory())).build();
         productRepo.save(newProduct);
         return newProduct;
     }
@@ -34,7 +39,8 @@ public class ProductServiceImpl implements ProductService {
         return productRepo.findById(id).orElse(null);
     }
 
-    public Product findByMarca(String marca){
+    public Product findByMarca(String marca1) {
+        Marca marca = marcaService.findByNombre(marca1);
         return productRepo.findByMarca(marca);
     }
 
